@@ -1,4 +1,4 @@
-<?php require_once 'connect.php'; ?>
+<?php require_once 'php/includes/connect.php'; ?>
 
 <!-- Header -->
 <?php include_once 'header.php'; ?>
@@ -20,24 +20,44 @@
 
                     <tbody>
                         <tr>
-                            <td><?php echo('nom_tarefa');?></td>
-                            <td><?php echo('custo');?></td>
-                            <td><?php echo('data_limite');?></td>
-                            <!-- Edit Trigers -->
-                            <td><a href="editar.php?<?php print('id='.'1')?>" class="btn-floating waves-effect waves-light amber"><i class="material-icons">edit</i></a></td>
-                            <!-- Modal Trigger -->
-                            <td><a href="#modal<?php echo('id');?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+                        <?php 
+                        $conn = db_connect();
+                    
+                        $sql = "SELECT * FROM tarefas";
+                        $query = mysqli_query($conn, $sql);
+                    
+                        mysqli_close($conn);
+                    
+                        if (mysqli_num_rows($query) == 0): ?>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        <?php else:
+                            while ($dados = mysqli_fetch_array($query)) : ?>
+                                <td><?php echo($dados['nom_tarefa']);?></td>
+                                <td><?php echo($dados['custo']);?></td>
+                                <td><?php echo($dados['data_limite']);?></td>
+                                <!-- Edit Trigers -->
+                                <td><a href="editar.php?<?php print($dados['id'])?>" class="btn-floating waves-effect waves-light amber"><i class="material-icons">edit</i></a></td>
+                                <!-- Modal Trigger -->
+                                <td><a href="#modal<?php echo($dados['id']);?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
 
-                            <!-- Modal Structure -->
-                            <div id="modal<?php echo('id');?>" class="modal">
-                                <div class="modal-content">
-                                    <h4>Modal Header</h4>
-                                    <p>A bunch of text</p>
+                                <!-- Modal Structure -->
+                                <div id="modal<?php echo($dados['id']);?>" class="modal">
+                                    <div class="modal-content">
+                                        <h4>Modal Header</h4>
+                                        <p>A bunch of text</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Agree</a>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Agree</a>
-                                </div>
-                            </div>
+                                <?php
+                            endwhile;   
+                        endif; 
+                        ?>
                         </tr>
                     </tbody>
                 </table>

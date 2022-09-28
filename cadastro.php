@@ -7,7 +7,7 @@
         // Definindo o formato de data
         var options = {
             autoClose: true,
-            format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
         };
 
         var elems = document.querySelectorAll('.datepicker');
@@ -21,8 +21,8 @@
             <form class="col s12 m6 push-m3" action="php/post/cadastrar.php" method="POST">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="nome" id="nome_tarefa" type="text" class="validate" required>
-                        <label for="nome_tarefa">Nome</label>
+                        <input name="nome" id="nome" type="text" class="validate" required>
+                        <label for="nome">Nome</label>
                     </div>
                     <div class="input-field col s6">
                         <input name="custo" id="custo" type="text" class="validate" required>
