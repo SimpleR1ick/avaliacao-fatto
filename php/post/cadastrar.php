@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verificando a presença de tags HTML indesejadas
         if (validaFormulario($_POST)) {
             // Redireciona para pagina que enviou o formulario
-            header("{$_SERVER['HTTP_REFERER']}");
+            header("Location: {$_SERVER['HTTP_REFERER']}");
             exit();
         } 
         // Invocando função para sanitizar o formulario

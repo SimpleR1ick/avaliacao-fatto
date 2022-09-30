@@ -10,7 +10,7 @@
  */
 function validaFormulario($array): bool {
     // Iniciando a variavel de controle
-    $ok = true;
+    $ok = false;
 
     // Percorre cada indice do array
     foreach ($array as $string) {
@@ -19,7 +19,7 @@ function validaFormulario($array): bool {
 
         // Verifica se a string sanitizada e diferente da original
         if ($f_string != $string) {
-            $ok = false;
+            $ok = true;
             break;
         }
     }

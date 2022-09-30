@@ -20,45 +20,48 @@
 
                     <tbody>
                         <tr>
-                        <?php 
-                        $conn = db_connect();
-                    
-                        $sql = "SELECT * FROM tarefas";
-                        $query = mysqli_query($conn, $sql);
-                    
-                        mysqli_close($conn);
-                    
-                        if (mysqli_num_rows($query) == 0): ?>
-                            <tr>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                        <?php else:
-                            while ($dados = mysqli_fetch_array($query)) : ?>
-                                <td><?php echo($dados['nom_tarefa']);?></td>
-                                <td><?php echo($dados['custo']);?></td>
-                                <td><?php echo($dados['data_limite']);?></td>
-                                <!-- Edit Trigers -->
-                                <td><a href="editar.php?<?php print($dados['id'])?>" class="btn-floating waves-effect waves-light amber"><i class="material-icons">edit</i></a></td>
-                                <!-- Modal Trigger -->
-                                <td><a href="#modal<?php echo($dados['id']);?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+                            <?php
+                            $conn = db_connect();
 
-                                <!-- Modal Structure -->
-                                <div id="modal<?php echo($dados['id']);?>" class="modal">
-                                    <div class="modal-content">
-                                        <h4>Modal Header</h4>
-                                        <p>A bunch of text</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Agree</a>
-                                    </div>
-                                </div>
-                                <?php
-                            endwhile;   
-                        endif; 
-                        ?>
+                            $sql = "SELECT * FROM tarefas";
+                            $query = mysqli_query($conn, $sql);
+
+                            mysqli_close($conn);
+
+                            if (mysqli_num_rows($query) == 0) : ?>
+                        <tr>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
                         </tr>
+                        <?php else :
+                                while ($dados = mysqli_fetch_array($query)) : ?>
+                            <td><?php echo ($dados['nom_tarefa']); ?></td>
+                            <td><?php echo ($dados['custo']); ?></td>
+                            <td><?php echo ($dados['data_limite']); ?></td>
+                            <!-- Edit Trigers -->
+                            <td><a href="modal_editar<?php print($dados['id']) ?>" class="btn-floating amber waves-effect waves-light modal-trigger"><i class="material-icons">edit</i></a></td>
+                            <!-- Modal Trigger -->
+                            <td><a href="#modal_excluir<?php print($dados['id']); ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+
+                            <!-- Modal Structure -->
+                            <div id="modal_excluir<?php echo ($dados['id']); ?>" class="modal">
+                                <div class="modal-content">
+                                    <h4>Atenção!</h4>
+                                    <p>Deseja excluir essa tarefa?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="php/post/excluir.php" method="POST">
+                                        <button class="btn red" type="submit" name="btn-deletar">Sim, excluir</button>
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                    </form>
+                                </div>
+                            </div>
+                    <?php
+                                endwhile;
+                            endif;
+                    ?>
+                    </tr>
                     </tbody>
                 </table>
             </div>
