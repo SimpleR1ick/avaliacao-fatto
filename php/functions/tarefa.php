@@ -32,4 +32,48 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
         header('Location: ../../index.php');
     }
 }
+
+/**
+ * 
+ * 
+ * 
+ * 
+ */
+function atualizarDadosTarefa($id, $nome, $custo, $data): void {
+    
+    $sql = "UPDATE tarefas SET (nom_tarefa = $nome, custo = $custo, data_limite = $data) 
+            WHERE id = $id";
+
+    $query = mysqli_query(CONNECT, $sql);
+
+}
+
+/**
+ * 
+ * 
+ * 
+ */
+function AtualizarOrdemTarefa($id, $ordem): void {
+
+}
+
+/**
+ * Função excluir um usúario do banco de dados
+ * 
+ * @author Henrique Dalmagro
+ */
+function excluirTarefa(): void {
+    $id = mysqli_escape_string(CONNECT, $_POST['id']);
+	
+	$sql = "DELETE FROM clientes WHERE id = $id";
+	
+	if (mysqli_query(CONNECT, $sql)) {
+		$_SESSION['mensagem'] = "Excluido com sucesso!";
+		header('Location: ../crud_index.php');
+
+	} else {
+		$_SESSION['mensagem'] = "Erro ao excluir!";
+		header('Location: ../crud_index.php');
+	}
+}
 ?>

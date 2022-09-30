@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Verificando se houve o set do botão do formulario
     if (isset($_POST['btn-deletar'])) {
-
+        
     }
 }
 ?>
