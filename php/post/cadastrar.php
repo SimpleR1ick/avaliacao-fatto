@@ -32,12 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = $dados['data'];
         $ordem = $dados['ordem'];
         
+        // Valida a disponibilidade do nome
         if (disponivelNome($nome)) {
-            // Invocando a função para cadastrar a tarefa
+            // Invoca a função de Registro
             cadastrarTarefa($nome, $valor, $data, $ordem);
-        }
-
-        
+        }    
     }   
 }
 // Encerrando a conexão

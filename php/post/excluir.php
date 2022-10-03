@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $id = $dados['delete_id'];
 
+        // Invoca a função de exclusão
         excluirTarefa($id);
     }
 }

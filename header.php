@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Document</title>
+    <title>CRUD Tarefas</title>
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -19,9 +19,10 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="index.php" class="brand-logo">Logo</a>
+                <a href="index.php" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="cadastro.php">Cadastro</a></li>
+                    <li><a href="index.php">Home</a></li>
                 </ul>
             </div>
         </nav>
