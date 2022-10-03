@@ -6,6 +6,7 @@ session_start();
 require_once '../includes/connect.php';
 include_once '../includes/sanitize.php';
 include_once '../functions/tarefa.php';
+include_once '../functions/verifica.php';
 
 // Abrindo conexão como constante global
 define('CONNECT', db_connect());
@@ -31,8 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = $dados['data'];
         $ordem = $dados['ordem'];
         
-        // Invocando a função para cadastrar a tarefa
-        cadastrarTarefa($nome, $valor, $data, $ordem);
+        if (disponivelNome($nome)) {
+            // Invocando a função para cadastrar a tarefa
+            cadastrarTarefa($nome, $valor, $data, $ordem);
+        }
+
+        
     }   
 }
 // Encerrando a conexão

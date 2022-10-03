@@ -8,31 +8,29 @@
  */
 function db_connect(): mixed {
     // Conexão com banco de dados
-    $hostname = "localhost"; //endereço do servidor
+    $hostname="localhost"; //endereço do servidor
     $username="root";
     $password="";
     $database="fatto";
 
-    try {
-        // Link de conexão
-        $connect = mysqli_connect($hostname, $username, $password, $database);
+    // Link de conexão
+    $connect = mysqli_connect($hostname, $username, $password, $database);
 
-        // Verifica se a conexão foi aberta
-        if (!$connect) {
-            throw new Exception('Falha na conexão:');
-        }
-        // Codifica com o caracteres ao manipular dados do banco de dados
-        mysqli_set_charset($connect, "utf8");
-
-        // Retorno da função
-        return $connect;
-    } 
-    catch (Exception $e) {
-        // Adiciona uma mensagem a sessâo
-        $_SESSION['msg'] = $e->getMessage();
-
-        // Exibe o erro
-        die(mysqli_connect_error());
+    // Verifica se a conexão foi aberta
+    if (!$connect) {
+        throw new Exception('Falha na conexão:');
     }
+    
+    // Retorno da função
+    return $connect;   
+}
+
+try {
+    // Tenta iniciar a conexão
+    $conn = db_connect();
+}
+catch (Exception $e) {
+    // Adiciona uma mensagem a sessâo
+    $_SESSION['msg'] = $e->getMessage();
 }
 ?>

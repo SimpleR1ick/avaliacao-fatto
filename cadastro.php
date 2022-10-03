@@ -1,3 +1,5 @@
+<?php include_once 'php/includes/mensagem.php'; ?>
+
 <!-- Header -->
 <?php include_once 'header.php'; ?>
 
@@ -20,10 +22,17 @@
         <div class="row">
             <form class="col s12 m6 push-m3" action="php/post/cadastrar.php" method="POST">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12">
                         <input name="nome" id="nome" type="text" class="validate" required>
                         <label for="nome">Nome</label>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input name="data" id="data" type="text" class="datepicker" required>
+                        <label for="data">Data limite</label>
+                    </div>
+
                     <div class="input-field col s6">
                         <input name="custo" id="custo" type="text" class="validate" required>
                         <label for="custo">Custo</label>
@@ -31,22 +40,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input name="data" id="data" type="text" class="datepicker" required>
-                        <label for="data">Data limite</label>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col s12">
                         Ordem de apresentação:
                         <div class="input-field inline">
-                            <input name="ordem" id="ordem" type="number" class="validate" required>
+                            <input name="ordem" id="ordem" type="number" class="validate">
                             <span class="helper-text">Prioridade</span>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="center-align">
                     <button class="btn waves-effect waves-light" type="submit" name="btn-cadastrar">Salvar
                         <i class="material-icons right">description</i>

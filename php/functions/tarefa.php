@@ -13,8 +13,6 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
     $sql = "INSERT INTO tarefas (nom_tarefa, custo, data_limite, ordem) 
             VALUES ('$nome', $custo, '$data', $ordem)";
 
-    var_dump($custo);
-    
     try {
         $query = mysqli_query(CONNECT, $sql);
 
@@ -22,11 +20,45 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
             throw new Exception('Erro, tarefa não inserida!');
         }
         // Adciona a sessão uma mensagem sucesso
-        $_SESSION['msg'] = 'Uhul, tarefa cadastrada!';
+        $_SESSION['msg'] = 'Tarefa cadastrada!';
     } 
-    catch (Exception $erro) {
+    catch (Exception $e) {
         // Adciona a sessão uma mensagem de erro
-        $_SESSION['msg'] = $erro->getMessage();
+        $_SESSION['msg'] = $e->getMessage();
+    } 
+    finally {
+        // Redireciona pra pagina principal
+        header('Location: ../../index.php');
+    }
+}
+
+/**
+ * Função para atualizar os dados de uma tarefa
+ * 
+ * @param int    $id
+ * @param string $nome
+ * @param float  $custo
+ * @param string $data
+ * @param int    $ordem
+ * 
+ * @author Henrique Dalmagro
+ */
+function atualizarDadosTarefa($id, $nome, $custo, $data, $ordem): void {
+    
+    $sql = "UPDATE tarefas SET nom_tarefa = '$nome', custo = $custo, data_limite = '$data', ordem = $ordem WHERE id = $id";
+
+    try {
+        $query = mysqli_query(CONNECT, $sql);
+
+        if (!$query) {
+            throw new Exception('Erro, ao editar!');
+        }
+        // Adciona a sessão uma mensagem sucesso
+        $_SESSION['msg'] = 'Tarefa atualizada!';
+    }
+    catch (Exception $e) {
+        // Adciona a sessão uma mensagem de erro
+        $_SESSION['msg'] = $e->getMessage();
     } 
     finally {
         header('Location: ../../index.php');
@@ -34,46 +66,30 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
 }
 
 /**
- * 
- * 
- * 
- * 
- */
-function atualizarDadosTarefa($id, $nome, $custo, $data): void {
-    
-    $sql = "UPDATE tarefas SET (nom_tarefa = $nome, custo = $custo, data_limite = $data) 
-            WHERE id = $id";
-
-    $query = mysqli_query(CONNECT, $sql);
-
-}
-
-/**
- * 
- * 
- * 
- */
-function AtualizarOrdemTarefa($id, $ordem): void {
-
-}
-
-/**
  * Função excluir um usúario do banco de dados
+ * 
+ * @param int $id da tarefa
  * 
  * @author Henrique Dalmagro
  */
-function excluirTarefa(): void {
-    $id = mysqli_escape_string(CONNECT, $_POST['id']);
-	
-	$sql = "DELETE FROM clientes WHERE id = $id";
-	
-	if (mysqli_query(CONNECT, $sql)) {
-		$_SESSION['mensagem'] = "Excluido com sucesso!";
-		header('Location: ../crud_index.php');
+function excluirTarefa($id): void {
+	$sql = "DELETE FROM tarefas WHERE id = '$id'";
 
-	} else {
-		$_SESSION['mensagem'] = "Erro ao excluir!";
-		header('Location: ../crud_index.php');
-	}
+    try {
+        $query = mysqli_query(CONNECT, $sql);
+
+        if (!$query) {
+            throw new Exception("Erro ao excluir!");
+        }
+
+        $_SESSION['msg'] = "Excluido com sucesso!";
+    }
+    catch (Exception $e) {
+        
+        $_SESSION['msg'] = $e->getMessage();
+    }
+    finally {
+        header('Location: ../../index.php');
+    }
 }
 ?>

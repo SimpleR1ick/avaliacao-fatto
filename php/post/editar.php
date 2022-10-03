@@ -2,6 +2,15 @@
 // Inicia a sessão
 session_start();
 
+// Incluindo funções
+require_once '../includes/connect.php';
+include_once '../includes/sanitize.php';
+include_once '../functions/tarefa.php';
+include_once '../functions/verifica.php';
+
+// Abrindo conexão como constante global
+define('CONNECT', db_connect());
+
 // Verificando se ocorreu a requisição POST a este pagina
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -21,11 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nome = $dados['nome'];
         $custo = $dados['custo'];
         $data = $dados['data'];
+        $ordem = $dados['ordem'];
 
-        if (verificaNome($nome)) {
+        if (verificaNome($id, $nome)) {
 
-            atualizarDadosTarefa($id, $nome, $custo, $data);
+            atualizarDadosTarefa($id, $nome, $custo, $data, $ordem);
         }
     }
 }
+// Encerrando a conexão
+mysqli_close(CONNECT);
 ?>
