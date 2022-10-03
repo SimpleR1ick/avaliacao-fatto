@@ -4,7 +4,7 @@
  * 
  * @param string $nome da tarefa
  * @param float  $custo de realização
- * @param date   $data formato (yyyy-mm-dd)
+ * @param string   $data formato (yyyy-mm-dd)
  * @param int    $ordem prioridade da tarefa
  * 
  * @author Henrique Dalmagro
@@ -14,7 +14,7 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
             VALUES ('$nome', $custo, '$data', $ordem)";
 
     try {
-        $query = mysqli_query(CONNECT, $sql);
+        $query = pg_query(CONNECT, $sql);
 
         if (!$query) {
             throw new Exception('Erro, tarefa não inserida!');
@@ -48,7 +48,7 @@ function atualizarDadosTarefa($id, $nome, $custo, $data, $ordem): void {
     $sql = "UPDATE tarefas SET nom_tarefa = '$nome', custo = $custo, data_limite = '$data', ordem = $ordem WHERE id = $id";
 
     try {
-        $query = mysqli_query(CONNECT, $sql);
+        $query = pg_query(CONNECT, $sql);
 
         if (!$query) {
             throw new Exception('Erro, ao editar!');
@@ -76,7 +76,7 @@ function excluirTarefa($id): void {
 	$sql = "DELETE FROM tarefas WHERE id = '$id'";
 
     try {
-        $query = mysqli_query(CONNECT, $sql);
+        $query = pg_query(CONNECT, $sql);
 
         if (!$query) {
             throw new Exception("Erro ao excluir!");

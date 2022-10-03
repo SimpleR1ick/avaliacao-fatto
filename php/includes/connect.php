@@ -1,36 +1,24 @@
 <?php
-/**
- * Função para abrir uma conexão com a base de dados
- * 
- * @return mysqli $connect link da conexão
- * 
- * @author Henrique Dalmagro
- */
-function db_connect(): mixed {
-    // Conexão com banco de dados
-    $hostname="localhost"; //endereço do servidor
-    $username="root";
-    $password="";
-    $database="fatto";
+// Conexão com banco de dados
+$host="	babar.db.elephantsql.com"; //endereço do servidor
+$db="wzrbejao";
+$user="wzrbejao";
+$pass="uxwM-TwRLgW0MKjaPC0sDCrNPFAQe8VU";
 
-    // Link de conexão
-    $connect = mysqli_connect($hostname, $username, $password, $database);
+$connect = null;
+
+try {
+    $connect = pg_connect("host=$host dbname=$db user=$user password=$pass");
 
     // Verifica se a conexão foi aberta
     if (!$connect) {
         throw new Exception('Falha na conexão:');
     }
-    
-    // Retorno da função
-    return $connect;   
-}
-
-try {
-    // Tenta iniciar a conexão
-    $conn = db_connect();
 }
 catch (Exception $e) {
     // Adiciona uma mensagem a sessâo
     $_SESSION['msg'] = $e->getMessage();
 }
+
+define("CONNECT", $connect);
 ?>

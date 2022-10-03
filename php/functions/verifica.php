@@ -9,10 +9,10 @@
  */
 function verificaNome($id, $nome): bool {
     $sql = "SELECT id, nom_tarefa FROM tarefas WHERE nom_tarefa = '$nome' ";
-    $query = mysqli_query(CONNECT, $sql);
+    $query = pg_query(CONNECT, $sql);
 
-    if (mysqli_num_rows($query) > 0) {
-        $result = mysqli_fetch_row($query);
+    if (pg_num_rows($query) > 0) {
+        $result = pg_fetch_row($query);
 
         if ($result[0] != $id) {
             $_SESSION['msg'] = 'Erro! nome da tarefa em uso!';
@@ -33,9 +33,9 @@ function verificaNome($id, $nome): bool {
  */
 function disponivelNome($nome): bool {
     $sql = "SELECT nom_tarefa FROM tarefas WHERE nom_tarefa = '$nome'";
-    $result = mysqli_query(CONNECT, $sql);
+    $result = pg_query(CONNECT, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
+    if (pg_num_rows($result) > 0) {
         $_SESSION['msg'] = 'Erro! nome da tarefa em uso!';
 
         header("Location: {$_SERVER['HTTP_REFERER']}"); 

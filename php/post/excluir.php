@@ -8,9 +8,6 @@ include_once '../includes/sanitize.php';
 include_once '../functions/tarefa.php';
 include_once '../functions/verifica.php';
 
-// Abrindo conexão como constante global
-define('CONNECT', db_connect());
-
 // Verificando se ocorreu a requisição POST a este pagina
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -31,5 +28,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         excluirTarefa($id);
     }
 }
-mysqli_close(CONNECT);
+pg_close(CONNECT);
 ?>
