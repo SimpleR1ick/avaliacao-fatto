@@ -31,6 +31,9 @@ function validaFormulario($array): bool {
  * Função para sanitizar os indices de um array
  * 
  * @param array $array a ser percorrido
+ * @param mysqli $conn conexão aberta
+ * 
+ * @return array sanitizado
  * 
  * @author Henrique Dalmagro
  */

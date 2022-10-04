@@ -7,7 +7,7 @@
  * 
  * @author Henrique Dalmagro
  */
-function verificaNome($id, $nome, $conn): bool {
+function verificaNome($conn, $id, $nome): bool {
     $sql = "SELECT id, nom_tarefa FROM tarefas WHERE nom_tarefa = '$nome' ";
     $query = mysqli_query($conn, $sql);
 
@@ -31,7 +31,7 @@ function verificaNome($id, $nome, $conn): bool {
  * 
  * @author Henrique Dalmagro
  */
-function disponivelNome($nome, $conn): bool {
+function disponivelNome($conn, $nome): bool {
     $sql = "SELECT nom_tarefa FROM tarefas WHERE nom_tarefa = '$nome'";
     $result = mysqli_query($conn, $sql);
 

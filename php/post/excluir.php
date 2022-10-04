@@ -20,12 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: {$_SERVER['HTTP_REFERER']}");
             exit();
         } 
+        // Invocando a função de sanitização do formulario
         $dados = sanitizaFormulario($_POST, $conn);
 
+        // Atribuindo o id a uma variavel
         $id = $dados['delete_id'];
 
         // Invoca a função de exclusão
-        excluirTarefa($id, $conn);
+        excluirTarefa($conn, $id);
     }
 }
 mysqli_close($conn);

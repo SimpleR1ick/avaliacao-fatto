@@ -1,10 +1,12 @@
 <?php
+// Importando o banco de dados
 require_once 'php/includes/connect.php';
 
 // Preprando uma consulta para obter todos os dados da tabela tarefas
 $sql = "SELECT * FROM tarefas ORDER BY ordem";
 $query = mysqli_query($conn, $sql);
 
+// Iniciando uma string contendo o HTML
 $dados = "
         <table class='striped'>
             <thead>
@@ -16,15 +18,19 @@ $dados = "
             </thead>
 
             <tbody>";
-
-while ($row = $result = mysqli_fetch_array($query)) :
-    extract($row);
-
+// Percorre o resultado, transforma em um array e imprime cada linha
+while ($row = $result = mysqli_fetch_array($query)):
+    // Inicia a verivel 
     $c = '';
 
+    // Extrai as informações do array em variaveis
+    extract($row);
+
+    // Verifica se o campo custo e maior que mil
     if ($custo >= 1000) {
-        $c = 'class=amber lighten-5';
+        $c = 'class=amber lighten-5'; // Adiciona uma classe de cor
     }
+    // Concatenando a uma linha na tabela
     $dados .= "
                 <tr $c>
                     <td>$nom_tarefa</td>
@@ -35,10 +41,12 @@ while ($row = $result = mysqli_fetch_array($query)) :
                 </tr>";
 endwhile;
 
+// Concatenando o fim da tabela
 $dados .= "
             </tbody>
         </table>";
 
+// Imprimindo o resultado na pagina
 echo $dados;
 
 // Encerrando a conexão

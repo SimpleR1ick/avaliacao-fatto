@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ordem = $dados['ordem'];
 
         // Valida a disponibilidade do nome
-        if (verificaNome($id, $nome, $conn)) {
+        if (verificaNome($conn, $id, $nome)) {
             // Invoca a função de Update
-            atualizarDadosTarefa($id, $nome, $custo, $data, $ordem, $conn);
+            atualizarDadosTarefa($conn, $id, $nome, $custo, $data, $ordem);
         }
     }
 }

@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ordem = $dados['ordem'];
         
         // Valida a disponibilidade do nome
-        if (disponivelNome($nome, $conn)) {
+        if (disponivelNome($conn, $nome)) {
             // Invoca a função de Registro
-            cadastrarTarefa($nome, $valor, $data, $ordem, $conn);
+            cadastrarTarefa($conn, $nome, $valor, $data, $ordem);
         }    
     }   
 }
