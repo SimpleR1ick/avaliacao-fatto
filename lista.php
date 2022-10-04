@@ -3,7 +3,7 @@ require_once 'php/includes/connect.php';
 
 // Preprando uma consulta para obter todos os dados da tabela tarefas
 $sql = "SELECT * FROM tarefas ORDER BY ordem";
-$query = pg_query(CONNECT, $sql);
+$query = mysqli_query($conn, $sql);
 
 $dados = "
         <table class='striped'>
@@ -17,7 +17,7 @@ $dados = "
 
             <tbody>";
 
-while ($row = $result = pg_fetch_array($query)) :
+while ($row = $result = mysqli_fetch_array($query)) :
     extract($row);
 
     $c = '';
@@ -42,5 +42,5 @@ $dados .= "
 echo $dados;
 
 // Encerrando a conexão
-pg_close(CONNECT);
+mysqli_close($conn);
 ?>

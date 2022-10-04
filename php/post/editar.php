@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         } 
         // Sanitiza os dados recebidos no formulario
-        $dados = sanitizaFormulario($_POST);
+        $dados = sanitizaFormulario($_POST, $conn);
 
         // Atribuindo os campos input a variaveis
         $id = $dados['id'];
@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ordem = $dados['ordem'];
 
         // Valida a disponibilidade do nome
-        if (verificaNome($id, $nome)) {
+        if (verificaNome($id, $nome, $conn)) {
             // Invoca a função de Update
-            atualizarDadosTarefa($id, $nome, $custo, $data, $ordem);
+            atualizarDadosTarefa($id, $nome, $custo, $data, $ordem, $conn);
         }
     }
 }
 // Encerrando a conexão
-pg_close(CONNECT);
+mysqli_close($conn);
 ?>

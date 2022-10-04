@@ -6,9 +6,9 @@ if (isset($_GET['id'])) {
 
     if (!empty($id)) {
         $sql = "SELECT * FROM tarefas WHERE id = $id LIMIT 1";
-        $query = pg_query(CONNECT, $sql);
+        $query = mysqli_query($conn, $sql);
         
-        $result = pg_fetch_array($query);
+        $result = mysqli_fetch_assoc($query);
 
         $retorna = ['dados'=>$result];
 

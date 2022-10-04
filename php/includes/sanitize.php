@@ -34,7 +34,7 @@ function validaFormulario($array): bool {
  * 
  * @author Henrique Dalmagro
  */
-function sanitizaFormulario($array): array {
+function sanitizaFormulario($array, $conn): array {
     // Percorre cada indice do array
     foreach ($array as $key => $value) {
         // Remover as tags HTML, contrabarras e espaços em branco de uma.
@@ -43,7 +43,7 @@ function sanitizaFormulario($array): array {
         $value = trim($value);
 
         // Escapa a variavel para consultar no banco de dados
-        $value = pg_escape_string(CONNECT, $value);
+        $value = mysqli_escape_string($conn, $value);
 
         // Sobreescreve o valor original
         $array[$key] = $value;

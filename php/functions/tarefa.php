@@ -9,12 +9,12 @@
  * 
  * @author Henrique Dalmagro
  */
-function cadastrarTarefa($nome, $custo, $data, $ordem): void {
+function cadastrarTarefa($nome, $custo, $data, $ordem, $conn): void {
     $sql = "INSERT INTO tarefas (nom_tarefa, custo, data_limite, ordem) 
             VALUES ('$nome', $custo, '$data', $ordem)";
 
     try {
-        $query = pg_query(CONNECT, $sql);
+        $query = mysqli_query($conn, $sql);
 
         if (!$query) {
             throw new Exception('Erro, tarefa não inserida!');
@@ -43,12 +43,12 @@ function cadastrarTarefa($nome, $custo, $data, $ordem): void {
  * 
  * @author Henrique Dalmagro
  */
-function atualizarDadosTarefa($id, $nome, $custo, $data, $ordem): void {
+function atualizarDadosTarefa($id, $nome, $custo, $data, $ordem, $conn): void {
     
     $sql = "UPDATE tarefas SET nom_tarefa = '$nome', custo = $custo, data_limite = '$data', ordem = $ordem WHERE id = $id";
 
     try {
-        $query = pg_query(CONNECT, $sql);
+        $query = mysqli_query($conn, $sql);
 
         if (!$query) {
             throw new Exception('Erro, ao editar!');
@@ -72,11 +72,11 @@ function atualizarDadosTarefa($id, $nome, $custo, $data, $ordem): void {
  * 
  * @author Henrique Dalmagro
  */
-function excluirTarefa($id): void {
+function excluirTarefa($id, $conn): void {
 	$sql = "DELETE FROM tarefas WHERE id = '$id'";
 
     try {
-        $query = pg_query(CONNECT, $sql);
+        $query = mysqli_query($conn, $sql);
 
         if (!$query) {
             throw new Exception("Erro ao excluir!");

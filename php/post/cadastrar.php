@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         } 
         // Invocando função para sanitizar o formulario
-        $dados = sanitizaFormulario($_POST);
+        $dados = sanitizaFormulario($_POST, $conn);
 
         // Atribuindo os campos input a variaveis
         $nome = $dados['nome'];
@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ordem = $dados['ordem'];
         
         // Valida a disponibilidade do nome
-        if (disponivelNome($nome)) {
+        if (disponivelNome($nome, $conn)) {
             // Invoca a função de Registro
-            cadastrarTarefa($nome, $valor, $data, $ordem);
+            cadastrarTarefa($nome, $valor, $data, $ordem, $conn);
         }    
     }   
 }
 // Encerrando a conexão
-pg_close(CONNECT);
+mysqli_close($conn);
 ?>
